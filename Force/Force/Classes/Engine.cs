@@ -37,12 +37,13 @@ namespace Force.Classes
 
         /* The game instance's, size, title etc. */
 
-        private Vector2D screenSize = new Vector2D(512, 512);
-        private string windowTitle = "New Game"; 
-        private Canvas window = null;
-        private Thread gameLoopThread = null;
+        private Vector2D ScreenSize = new Vector2D(512, 512);
+        private string WindowTitle = "New Game"; 
+        private Canvas Window = null;
+        private Thread GameLoopThread = null;
 
         public Color BackgroundColour = Color.White;
+        private static List<Shape2D> AllShapes = new List<Shape2D>();
 
         #endregion
 
@@ -51,29 +52,50 @@ namespace Force.Classes
         /// <summary>
         /// Generates a new instance of the game 
         /// </summary>
-        /// <param name="screenSize">Screen size</param>
-        /// <param name="windowTitle">Window title</param>
+        /// <param name="ScreenSize">Screen size</param>
+        /// <param name="WindowTitle">Window title</param>
 
-        public Engine(Vector2D screenSize, string windowTitle)
-            
+        public Engine(Vector2D ScreenSize, string WindowTitle)          
         {
-            this.screenSize = screenSize; // Sets game instance's window size
-            this.windowTitle = windowTitle; // Sets game instance's window title
+            Log.Info("Game is starting...");
+
+            this.ScreenSize = ScreenSize; // Sets game instance's window size
+            this.WindowTitle = WindowTitle; // Sets game instance's window title
 
             /* Sets up the game window */
 
-            window = new Canvas(); 
-            window.Size = new Size((int)this.screenSize.X, (int)screenSize.Y);
-            window.Text = this.windowTitle;
-            window.Paint += Renderer;
+            Window = new Canvas(); 
+            Window.Size = new Size((int)this.ScreenSize.X, (int)this.ScreenSize.Y);
+            Window.Text = this.WindowTitle;
+            Window.Paint += Renderer;
 
             /* Starts a new thread for the game loop, so the screen updates */
 
-            gameLoopThread = new Thread(GameLoop);
-            gameLoopThread.Start();
+            GameLoopThread = new Thread(GameLoop);
+            GameLoopThread.Start();
 
-            Application.Run(window); // Runs our custom game window 
+            Application.Run(Window); // Runs our custom game window 
             
+        }
+
+        /// <summary>
+        /// Adds the shape to the engine's list of shapes
+        /// </summary>
+        /// <param name="shape">The shape to add</param>
+
+        public static void RegisterShape(Shape2D shape)
+        {
+            AllShapes.Add(shape);
+        }
+
+        /// <summary>
+        /// Removes the shape to the engine's list of shapes
+        /// </summary>
+        /// <param name="shape">The shape to remove</param>
+
+        public static void UnregisterShape(Shape2D shape)
+        {
+            AllShapes.Remove(shape);
         }
 
         void GameLoop()
@@ -82,14 +104,14 @@ namespace Force.Classes
 
             /* While the game loop thread is running, it continues to loop */
 
-            while (gameLoopThread.IsAlive)
+            while (GameLoopThread.IsAlive)
             {
                 try 
                 {
                     /* While game loop thread is running, the screen refreshes */
 
                     OnDraw(); // Basically just draws the frame before it's displayed
-                    window.BeginInvoke((MethodInvoker)delegate { window.Refresh(); });
+                    Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });
 
                     Update(); // After the frame is drawn, call the Update() Method 
                     Thread.Sleep(1); // Add delay so that it doesn't refresh on top of another refresh call
@@ -97,7 +119,7 @@ namespace Force.Classes
                 
                 catch /* Says 'Game is loading...' while waiting for app to run */
                 {
-                    Console.WriteLine("Game is Loading...");
+                    Log.Error("Window has not been found... Wating...");
                 }
             }
         }
@@ -107,6 +129,11 @@ namespace Force.Classes
             Graphics graphics = e.Graphics;
 
             graphics.Clear(BackgroundColour); // Background colour or skybox
+
+            foreach(Shape2D shape in AllShapes) // Draws each shape on the screen with the correct position and scale
+            {
+                graphics.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
+            }      
         }
 
         public abstract void OnLoad(); // We use this to create new game objects or load sprites etc.

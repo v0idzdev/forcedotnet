@@ -10,9 +10,24 @@ namespace Force
 {
     class Game : Engine
     {
+        #region Shapes & Game Objects
+
+        /* Put your game objects and shapes here.
+         * Then load them in the OnLoad method. */
+
+        Shape2D player;
+
+        #endregion
+
+        #region Initialise Engine
+
         /* Starts up the game engine */
 
         public Game() : base(new Vector2D(615, 515), "New Force.NET Game") { }
+
+        #endregion
+
+        #region Game Logic
 
         /* OnLoad is called before the graphics renderer starts. 
          * Use this for loading sprites, game objects, UI etc. */
@@ -20,6 +35,8 @@ namespace Force
         public override void OnLoad()
         {
             BackgroundColour = Color.Black;
+
+            player = new Shape2D(new Vector2D(10, 10), new Vector2D(10, 10), "Test");
         }
 
         /* OnDraw is called before every frame update.
@@ -27,7 +44,7 @@ namespace Force
 
         public override void OnDraw()
         {
-            throw new NotImplementedException();
+            
         }
 
         /* Update is called after every frame update. 
@@ -35,7 +52,9 @@ namespace Force
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            
         }
+
+        #endregion
     }
 }
