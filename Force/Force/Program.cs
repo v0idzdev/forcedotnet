@@ -10,6 +10,9 @@ namespace Force
     {
         static void Main(string[] args)
         {
+            /* Main creates new game instance */
+
+            Game game = new Game();
         }
     }
 }

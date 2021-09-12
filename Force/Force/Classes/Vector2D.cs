@@ -12,8 +12,14 @@ namespace Force.Classes
 
     public class Vector2D
     {
+        #region Properties
+
         public float X { get; set; } // The vector's x position
         public float Y { get; set; } // The vector's y position
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Creates a new Vector2D, with values [0, 0]
@@ -37,6 +43,10 @@ namespace Force.Classes
             this.Y = y; // Sets new vector's y pos to value passed in
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Generates a new zero vector [0, 0]
         /// </summary>
@@ -48,5 +58,7 @@ namespace Force.Classes
         {
             return new Vector2D(0, 0); // Generates [0, 0] vector
         }
+
+        #endregion
     }
 }
