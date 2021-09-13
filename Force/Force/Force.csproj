@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Shape2D.cs" />
+    <Compile Include="Classes\Sprite2D.cs" />
     <Compile Include="Classes\Vector2D.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />

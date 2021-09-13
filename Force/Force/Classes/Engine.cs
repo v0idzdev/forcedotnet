@@ -42,8 +42,10 @@ namespace Force.Classes
         private Canvas Window = null;
         private Thread GameLoopThread = null;
 
-        public Color BackgroundColour = Color.White;
-        private static List<Shape2D> AllShapes = new List<Shape2D>();
+        public Color BackgroundColour = Color.White; // Background colour
+
+        private static List<Shape2D> AllShapes = new List<Shape2D>(); // All game shapes
+        private static List<Sprite2D> AllSprites = new List<Sprite2D>(); // All game sprites
 
         #endregion
 
@@ -89,6 +91,16 @@ namespace Force.Classes
         }
 
         /// <summary>
+        /// Adds the sprite to the engine's list of sprites
+        /// </summary>
+        /// <param name="shape">The shape to add</param>
+
+        public static void RegisterSprite(Sprite2D sprite)
+        {
+            AllSprites.Add(sprite);
+        }
+
+        /// <summary>
         /// Removes the shape to the engine's list of shapes
         /// </summary>
         /// <param name="shape">The shape to remove</param>
@@ -96,6 +108,16 @@ namespace Force.Classes
         public static void UnregisterShape(Shape2D shape)
         {
             AllShapes.Remove(shape);
+        }
+
+        /// <summary>
+        /// Removes the sprite to the engine's list of sprites
+        /// </summary>
+        /// <param name="shape">The shape to add</param>
+
+        public static void UnregisterSprite(Sprite2D sprite)
+        {
+            AllSprites.Remove(sprite);
         }
 
         void GameLoop()
@@ -130,10 +152,15 @@ namespace Force.Classes
 
             graphics.Clear(BackgroundColour); // Background colour or skybox
 
-            foreach(Shape2D shape in AllShapes) // Draws each shape on the screen with the correct position and scale
+            foreach (Shape2D shape in AllShapes) // Draws each shape on the screen with the correct position and scale
             {
                 graphics.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
-            }      
+            }    
+            
+            foreach (Sprite2D sprite in AllSprites)  // Draws each sprite on the screen with the correct position and scale
+            {
+                graphics.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
+            }
         }
 
         public abstract void OnLoad(); // We use this to create new game objects or load sprites etc.

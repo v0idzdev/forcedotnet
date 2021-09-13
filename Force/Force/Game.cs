@@ -15,7 +15,7 @@ namespace Force
         /* Put your game objects and shapes here.
          * Then load them in the OnLoad method. */
 
-        Shape2D player;
+        Sprite2D player;
 
         #endregion
 
@@ -36,7 +36,8 @@ namespace Force
         {
             BackgroundColour = Color.Black;
 
-            player = new Shape2D(new Vector2D(10, 10), new Vector2D(10, 10), "Test");
+            //player = new Shape2D(new Vector2D(10, 10), new Vector2D(10, 10), "Test");
+            player = new Sprite2D(new Vector2D(10, 10), new Vector2D(20, 20), "Square", "Player");
         }
 
         /* OnDraw is called before every frame update.
