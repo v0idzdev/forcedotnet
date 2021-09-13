@@ -2,9 +2,9 @@
 
 Force.NET — An open source game framework, built in C#.
 Force.NET is a simple game framework for 2D games, made 
-using windows forms. Development is currently going well.
-Development is currently in the alpha phase, so the framework's
-features have not been fully decided or implemented as of yet.
+using windows forms. Development is currently in the alpha 
+phase, so the framework's features have not been fully 
+decided or implemented as of yet.
 
 
 FEATURES
