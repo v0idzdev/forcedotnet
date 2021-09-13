@@ -30,9 +30,17 @@ namespace Force.Classes
             this.Scale = Scale;
             this.Tag = Tag;
 
-            Image temp = Image.FromFile($"Assets/{Directory}.png");
-            Bitmap sprite = new Bitmap(temp, (int)this.Scale.X, (int)this.Scale.Y);
-            Sprite = sprite;
+            try // If the sprite / image CAN be loaded
+            {
+                Image temp = Image.FromFile($"Assets/{Directory}.png");
+                Bitmap sprite = new Bitmap(temp);
+                Sprite = sprite;
+            }    
+            
+            catch // If the sprite / image CAN'T be loaded, display an error message in the log
+            {
+                Log.Error($"[SPRITE 2D] {Tag} wasn't loaded — Please enter a valid directory.");
+            }
 
             Log.Info($"[SHAPE 2D] {Tag} — Has been registered!");
             Engine.RegisterSprite(this);

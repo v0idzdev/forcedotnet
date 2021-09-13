@@ -43,13 +43,14 @@ namespace Force.Classes
         private Thread GameLoopThread = null;
 
         public Color BackgroundColour = Color.White; // Background colour
+        public Vector2D CameraPosition = Vector2D.Zero(); // The game camera
 
         private static List<Shape2D> AllShapes = new List<Shape2D>(); // All game shapes
         private static List<Sprite2D> AllSprites = new List<Sprite2D>(); // All game sprites
 
         #endregion
 
-        #region Constructors
+        #region Constructor
 
         /// <summary>
         /// Generates a new instance of the game 
@@ -76,9 +77,12 @@ namespace Force.Classes
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
 
-            Application.Run(Window); // Runs our custom game window 
-            
+            Application.Run(Window); // Runs our custom game window            
         }
+
+        #endregion
+
+        #region Registering
 
         /// <summary>
         /// Adds the shape to the engine's list of shapes
@@ -113,12 +117,16 @@ namespace Force.Classes
         /// <summary>
         /// Removes the sprite to the engine's list of sprites
         /// </summary>
-        /// <param name="shape">The shape to add</param>
+        /// <param name="shape">The shape to add</param>       
 
         public static void UnregisterSprite(Sprite2D sprite)
         {
             AllSprites.Remove(sprite);
         }
+
+        #endregion
+
+        #region Game Loop
 
         void GameLoop()
         {
@@ -146,6 +154,10 @@ namespace Force.Classes
             }
         }
 
+        #endregion
+
+        #region Renderer
+
         private void Renderer(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
@@ -161,7 +173,13 @@ namespace Force.Classes
             {
                 graphics.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
             }
+
+            graphics.TranslateTransform(CameraPosition.X, CameraPosition.Y); // Sets the position of the camera
         }
+
+        #endregion
+
+        #region Abstract Methods
 
         public abstract void OnLoad(); // We use this to create new game objects or load sprites etc.
         public abstract void Update(); // We use this for our movement, physics and such
