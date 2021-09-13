@@ -29,10 +29,10 @@ Planned Features:
 
 VERSION HISTORY
 
-Alpha 1.0.0 - Initial commit
-Alpha 1.1.0 - Added Vector2D class
-Alpha 1.1.1 - Tested the game constructor and fixed a few bugs
-Alpha 1.2.0 - Added Update(), OnDraw(), and OnLoad() methods
-Alpha 1.3.0 - Added 2D shape loading / rendering, and a logging system
-Alpha 1.4.0 - Added 2D sprite loading / rendering, however this isn't fully optimised
-Alpha 1.4.1 - Tested sprites & fixed small bugs, and started work on a camera system
+- Alpha 1.0.0 - Initial commit
+- Alpha 1.1.0 - Added Vector2D class
+- Alpha 1.1.1 - Tested the game constructor and fixed a few bugs
+- Alpha 1.2.0 - Added Update(), OnDraw(), and OnLoad() methods
+- Alpha 1.3.0 - Added 2D shape loading / rendering, and a logging system
+- Alpha 1.4.0 - Added 2D sprite loading / rendering, however this isn't fully optimised
+- Alpha 1.4.1 - Tested sprites & fixed small bugs, and started work on a camera system
