@@ -30,15 +30,14 @@ namespace Force
         {
             // A 'g' means a ground tile will be here
 
-            { ".", ".", ".", ".", ".", ".", ".", "." },
-            { ".", ".", ".", ".", ".", ".", ".", "." },
-            { ".", ".", ".", ".", ".", ".", ".", "." },
-            { ".", ".", ".", ".", ".", ".", ".", "." },
-            { ".", ".", ".", ".", ".", ".", ".", "." },
-            { "g", "g", ".", "g", "g", ".", "g", "g" },
-            { "g", "g", "g", "g", "g", "g", "g", "g" },
-            { "g", "g", "g", "g", "g", "g", "g", "g" },
-        };
+            { "g", "g", "g", "g", "g", "g", "g" },
+            { "g", ".", ".", ".", ".", ".", "g" },
+            { "g", ".", ".", ".", "g", ".", "g" },
+            { "g", ".", "g", "g", "g", ".", "g" },
+            { "g", ".", "g", ".", "g", ".", "g" },
+            { "g", ".", "g", ".", ".", ".", "g" },
+            { "g", "g", "g", "g", "g", "g", "g" }, 
+        }; 
 
         #endregion
 
@@ -57,14 +56,16 @@ namespace Force
 
         public override void OnLoad()
         {
-            // Setting colour and cam position
+            /* Objects loaded first will appear
+             * in front of objects loaded after */         
+
+            // Setting background colour
 
             BackgroundColour = Color.Black;
-            CameraPosition.X += 43;
 
-            // Rendering player sprite on the screen with dimensions 16 * 16, at position 10, 250
+            // Rendering player sprite on the screen with dimensions 16 * 16, at position 80, 250
 
-            player = new Sprite2D(new Vector2D(10, 250), new Vector2D(16, 16), "Square", "Player");
+            player = new Sprite2D(new Vector2D(80, 250), new Vector2D(16, 16), "Square", "Player");
 
             // Drawing the ground tiles on the screen
 
