@@ -44,6 +44,7 @@ namespace Force.Classes
 
         public Color BackgroundColour = Color.White; // Background colour
         public Vector2D CameraPosition = Vector2D.Zero(); // The game camera
+        public float CameraAngle = 0F; // The angle to rotate the camera by
 
         private static List<Shape2D> AllShapes = new List<Shape2D>(); // All game shapes
         private static List<Sprite2D> AllSprites = new List<Sprite2D>(); // All game sprites
@@ -164,6 +165,10 @@ namespace Force.Classes
 
             graphics.Clear(BackgroundColour); // Background colour or skybox
 
+            graphics.TranslateTransform(CameraPosition.X, CameraPosition.Y); // Sets the position of the camera
+
+            graphics.RotateTransform(CameraAngle); // Rotates the camera, by using the camera angle variable
+
             foreach (Shape2D shape in AllShapes) // Draws each shape on the screen with the correct position and scale
             {
                 graphics.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
@@ -173,8 +178,6 @@ namespace Force.Classes
             {
                 graphics.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
             }
-
-            graphics.TranslateTransform(CameraPosition.X, CameraPosition.Y); // Sets the position of the camera
         }
 
         #endregion

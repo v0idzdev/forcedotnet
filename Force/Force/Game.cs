@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Drawing;
 using Force.Classes;
 
@@ -49,6 +50,7 @@ namespace Force
         public override void OnLoad()
         {
             BackgroundColour = Color.Black;
+            CameraPosition.X += 43;
 
             //player = new Shape2D(new Vector2D(10, 10), new Vector2D(10, 10), "Test");
             //player = new Sprite2D(new Vector2D(10, 10), new Vector2D(64, 64), "Square", "Player");
@@ -76,11 +78,9 @@ namespace Force
         /* Update is called after every frame update. 
          * Use this for movement, physics, and such */
 
-        float x = .1F;
-
         public override void Update()
         {
-           
+            
         }
 
         #endregion
