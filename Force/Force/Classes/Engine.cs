@@ -72,6 +72,8 @@ namespace Force.Classes
             Window.Size = new Size((int)this.ScreenSize.X, (int)this.ScreenSize.Y);
             Window.Text = this.WindowTitle;
             Window.Paint += Renderer;
+            Window.KeyDown += Window_KeyDown;
+            Window.KeyUp += Window_KeyUp;
 
             /* Starts a new thread for the game loop, so the screen updates */
 
@@ -79,6 +81,20 @@ namespace Force.Classes
             GameLoopThread.Start();
 
             Application.Run(Window); // Runs our custom game window            
+        }
+
+        #endregion
+
+        #region User Inputs
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            GetKeyUp(e); // Calls the abstract GetkeyUp method
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            GetKeyDown(e); // Calls the abstract GetKeyDown method
         }
 
         #endregion
@@ -183,10 +199,12 @@ namespace Force.Classes
         #endregion
 
         #region Abstract Methods
-
+        
         public abstract void OnLoad(); // We use this to create new game objects or load sprites etc.
         public abstract void Update(); // We use this for our movement, physics and such
         public abstract void OnDraw(); // We use this to draw graphics into our game
+        public abstract void GetKeyDown(KeyEventArgs e); // We use this to track key pressed
+        public abstract void GetKeyUp(KeyEventArgs e); // We use this to track key releases
 
         #endregion
     }

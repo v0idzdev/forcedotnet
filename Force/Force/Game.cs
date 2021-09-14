@@ -16,7 +16,15 @@ namespace Force
         /* Put your game objects and shapes here.
          * Then load them in the OnLoad method. */
 
-        //Sprite2D player;
+        Sprite2D player; // The player
+
+        float speed = 2F; // Movement speed
+
+        bool left; // If moving left
+        bool right; // If moving right
+        bool down; // If moving down
+        bool up; // If moving up
+
 
         string[,] Map = /* The 'grid' to build our level */
         {
@@ -49,11 +57,16 @@ namespace Force
 
         public override void OnLoad()
         {
+            // Setting colour and cam position
+
             BackgroundColour = Color.Black;
             CameraPosition.X += 43;
 
-            //player = new Shape2D(new Vector2D(10, 10), new Vector2D(10, 10), "Test");
-            //player = new Sprite2D(new Vector2D(10, 10), new Vector2D(64, 64), "Square", "Player");
+            // Rendering player sprite on the screen with dimensions 16 * 16, at position 10, 250
+
+            player = new Sprite2D(new Vector2D(10, 250), new Vector2D(16, 16), "Square", "Player");
+
+            // Drawing the ground tiles on the screen
 
             for (int i = 0; i < Map.GetLength(0); i++) // For each horizontal block
             {
@@ -80,7 +93,46 @@ namespace Force
 
         public override void Update()
         {
+            if (up) // If moving upwards          
+                player.Position.Y -= speed;
             
+
+            if (down) // If moving downwards       
+                player.Position.Y += speed;
+            
+
+            if (left) // If moving to left        
+                player.Position.X -= speed;
+            
+
+            if (right) // If moving to right        
+                player.Position.X += speed;         
+        }
+
+        /* GetKeyDown is used for detecting whether a 
+         * given key has been or is being pressed down. */
+
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+            // Gets key presses from the keyboard
+
+            if (e.KeyCode == Keys.W) { up = true; }
+            if (e.KeyCode == Keys.S) { down = true; }
+            if (e.KeyCode == Keys.A) { left = true; }
+            if (e.KeyCode == Keys.D) { right = true; }
+        }
+
+        /* GetKeyUp is used for detecting whether a 
+         * given key has stopped being pressed down. */
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            // Gets key releases from the keyboard
+
+            if (e.KeyCode == Keys.W) { up = false; }
+            if (e.KeyCode == Keys.S) { down = false; }
+            if (e.KeyCode == Keys.A) { left = false; }
+            if (e.KeyCode == Keys.D) { right = false; }
         }
 
         #endregion
