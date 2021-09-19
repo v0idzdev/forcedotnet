@@ -36,3 +36,7 @@ VERSION HISTORY
 - Alpha 1.3.0 - Added 2D shape loading / rendering, and a logging system
 - Alpha 1.4.0 - Added 2D sprite loading / rendering, however this isn't fully optimised
 - Alpha 1.4.1 - Tested sprites & fixed small bugs, and started work on a camera system
+- Alpha 1.5.0 - Added a simple camera system with translation and rotation 
+- Alpha 1.6.0 - Added a basic input system featuring GetKeyDown() and GetKeyUp() methods
+- Alpha 1.6.1 - Made some minor changes to the test level and test game 
+- Alpha 1.7.0 - Added a very simple sprite collision detection system 
