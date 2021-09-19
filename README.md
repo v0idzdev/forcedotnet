@@ -16,15 +16,17 @@ Implemented Features:
 - Update, Draw and Load methods
 - Log messages via the console
 - Sprite and shape drawing 
+- Input system 
+- Camera w/ movement & rotation
+- 2D Sprite collision detection
 
 Features In Development:
 
-- Camera
+- 2D Shaoe collision detection
 
 Planned Features:
 
-- Collisions
-- Camera zoom
+- Physics engine 
 
 
 VERSION HISTORY
