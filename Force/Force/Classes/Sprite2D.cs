@@ -44,6 +44,26 @@ namespace Force.Classes
 
             Log.Info($"[SHAPE 2D] {Tag} — Has been registered!");
             Engine.RegisterSprite(this);
+        }    
+        
+        /// <summary>
+        /// This function returns true when two sprites are colliding.
+        /// </summary>
+        /// <param name="a">Sprite A</param>
+        /// <param name="b">Sprite B</param>
+        /// <returns></returns>
+
+        public bool IsColliding(Sprite2D a, Sprite2D b)
+        {
+            if (a.Position.X > b.Position.X + b.Scale.X &&
+                a.Position.X + a.Scale.X > b.Position.X &&
+                a.Position.Y > b.Position.Y + b.Scale.Y &&
+                a.Position.Y + a.Scale.Y > b.Position.Y)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

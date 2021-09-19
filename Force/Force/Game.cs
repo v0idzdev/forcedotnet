@@ -17,6 +17,7 @@ namespace Force
          * Then load them in the OnLoad method. */
 
         Sprite2D player; // The player
+        Sprite2D playerB; // Second player
 
         float speed = 2F; // Movement speed
 
@@ -67,6 +68,10 @@ namespace Force
 
             player = new Sprite2D(new Vector2D(80, 250), new Vector2D(16, 16), "Square", "Player");
 
+            // Rendering playerB sprite on the screen with dimensions 16 * 16, at position 90, 100
+
+            playerB = new Sprite2D(new Vector2D(90, 100), new Vector2D(16, 16), "Square", "Player");
+
             // Drawing the ground tiles on the screen
 
             for (int i = 0; i < Map.GetLength(0); i++) // For each horizontal block
@@ -107,7 +112,12 @@ namespace Force
             
 
             if (right) // If moving to right        
-                player.Position.X += speed;         
+                player.Position.X += speed;
+
+            /* If the two players are colliding */
+
+            if (player.IsColliding(player, playerB))
+                Log.Info("Colliding"); // Log collision
         }
 
         /* GetKeyDown is used for detecting whether a 
